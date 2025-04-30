@@ -21,10 +21,11 @@ module ResponseHelpers
           total_count: paginated_collection.total_count
         }
       end
-
-      def error_response(message = "Something went wrong", status = 500)
-        error!({ success: false, error: message }, status)
-      end
+      # def error_response(message = "Something went wrong", status = 500)
+      #   # status = status.is_a?(Hash) && status[:status] ? status[:status] : status
+      #   debugger
+      #   error!(message, status)
+      # end
     end
   end
 end

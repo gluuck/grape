@@ -1,3 +1,6 @@
+require_relative "users"
+require_relative "posts"
+
 module V1
   class Root < Grape::API
     format :json
@@ -5,5 +8,4 @@ module V1
     mount V1::Users
     mount V1::Posts
   end
-  # V1
 end

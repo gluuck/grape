@@ -1,6 +1,9 @@
+require_relative "v1/root"
+
 class Api < Grape::API
   include ErrorHandlers
   include ResponseHelpers
+
   format :json
   prefix :api
   version "v1", using: :path, default: true

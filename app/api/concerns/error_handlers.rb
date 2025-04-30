@@ -3,15 +3,15 @@ module ErrorHandlers
 
   included do
     rescue_from(ActiveRecord::RecordInvalid) do |e|
-      error_response(e.record.errors.full_messages.join(", "), 422)
+      error!({ success: false, errors: { message: e.record.errors.full_messages.join(", ") } }, 422)
     end
 
     rescue_from(ActiveRecord::RecordNotFound) do |e|
-      error_response("Record Not Found: #{e.message}", 404)
+      error!({ success: false, errors: { message: e.message, status: 404 } }, 404)
     end
 
-    rescue_from(:all) do |e|
-      error_response("Internal server error: #{e.message}", 500)
+    rescue_from(Grape::Exceptions::ValidationErrors) do |e|
+      error!({ success: false, errors: { message: e.message, status: 422 } }, 422)
     end
   end
 end
